@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Formulario de Matrícula Digital · MGIMD</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700;9..144,900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy: #1A2B4A;
+      --navy-light: #2A3F66;
+      --gold: #C9A858;
+      --gold-dark: #A88838;
+      --warm: #F5EFE3;
+      --paper: #FAF7F1;
+      --ink: #1F2937;
+      --ink-soft: #4B5563;
+      --ink-muted: #6B7280;
+      --line: #D9D2C2;
+      --success: #15803D;
+      --success-bg: #DCFCE7;
+      --error: #B91C1C;
+      --error-bg: #FEE2E2;
+      --shadow: 0 4px 16px rgba(26, 43, 74, 0.06);
+      --shadow-lg: 0 8px 32px rgba(26, 43, 74, 0.12);
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: var(--paper);
+      color: var(--ink);
+      line-height: 1.6;
+      min-height: 100vh;
+      background-image:
+        radial-gradient(circle at 10% 0%, rgba(201, 168, 88, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 90% 100%, rgba(26, 43, 74, 0.03) 0%, transparent 50%);
+    }
+
+    /* ── HEADER ── */
+    .institutional-header {
+      background: var(--navy);
+      color: white;
+      padding: 28px 24px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .institutional-header::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--gold) 0%, var(--gold-dark) 100%);
+    }
+    .institutional-header .ministry {
+      font-size: 11px;
+      letter-spacing: 3px;
+      font-weight: 600;
+      color: var(--gold);
+      margin-bottom: 8px;
+      text-transform: uppercase;
+    }
+    .institutional-header h1 {
+      font-family: 'Fraunces', serif;
+      font-weight: 900;
+      font-size: clamp(20px, 4vw, 28px);
+      margin-bottom: 4px;
+      line-height: 1.2;
+    }
+    .institutional-header .school-name {
+      font-size: 15px;
+      color: rgba(255,255,255,0.85);
+      font-weight: 500;
+    }
+
+    /* ── PROGRESS BAR ── */
+    .progress-container {
+      background: white;
+      padding: 16px 24px;
+      border-bottom: 1px solid var(--line);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      box-shadow: var(--shadow);
+    }
+    .progress-bar {
+      max-width: 900px;
+      margin: 0 auto;
+      height: 8px;
+      background: var(--warm);
+      border-radius: 100px;
+      overflow: hidden;
+      position: relative;
+    }
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--gold-dark), var(--gold));
+      transition: width 0.4s ease;
+      border-radius: 100px;
+    }
+    .progress-text {
+      max-width: 900px;
+      margin: 8px auto 0;
+      font-size: 12px;
+      color: var(--ink-muted);
+      display: flex;
+      justify-content: space-between;
+      font-weight: 500;
+    }
+
+    /* ── MAIN CONTAINER ── */
+    .form-container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 32px 20px 80px;
+    }
+
+    .form-title {
+      text-align: center;
+      margin-bottom: 32px;
+      padding: 24px 0;
+    }
+    .form-title .badge {
+      display: inline-block;
+      background: var(--warm);
+      color: var(--navy);
+      padding: 6px 14px;
+      border-radius: 100px;
+      font-size: 11px;
+      letter-spacing: 2px;
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      border: 1px solid var(--line);
+    }
+    .form-title h2 {
+      font-family: 'Fraunces', serif;
+      font-weight: 700;
+      font-size: clamp(28px, 5vw, 42px);
+      color: var(--navy);
+      line-height: 1.15;
+      margin-bottom: 8px;
+    }
+    .form-title p {
+      color: var(--ink-muted);
+      font-size: 15px;
+    }
+
+    /* ── SECTIONS ── */
+    .section {
+      background: white;
+      border-radius: 16px;
+      padding: 28px;
+      margin-bottom: 24px;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--line);
+      position: relative;
+    }
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding-bottom: 20px;
+      margin-bottom: 24px;
+      border-bottom: 2px solid var(--warm);
+    }
+    .section-number {
+      width: 44px;
+      height: 44px;
+      background: var(--navy);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Fraunces', serif;
+      font-weight: 700;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+    .section-title {
+      flex: 1;
+    }
+    .section-title h3 {
+      font-family: 'Fraunces', serif;
+      font-size: 22px;
+      color: var(--navy);
+      font-weight: 700;
+      margin-bottom: 2px;
+    }
+    .section-title .subtitle {
+      font-size: 13px;
+      color: var(--ink-muted);
+    }
+    .optional-badge {
+      background: var(--warm);
+      color: var(--gold-dark);
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+
+    /* ── FIELDS ── */
+    .field-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+    .field-grid.three-cols { grid-template-columns: repeat(3, 1fr); }
+    .field-grid.full-row { grid-template-columns: 1fr; }
+    .field-full { grid-column: 1 / -1; }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .field label {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--navy);
+      letter-spacing: 0.2px;
+    }
+    .field label .req {
+      color: var(--error);
+      margin-left: 2px;
+    }
+    .field label .opt {
+      color: var(--ink-muted);
+      font-weight: 500;
+      font-size: 11px;
+      margin-left: 4px;
+    }
+    .field input,
+    .field select,
+    .field textarea {
+      font-family: inherit;
+      font-size: 15px;
+      padding: 12px 14px;
+      border: 1.5px solid var(--line);
+      border-radius: 10px;
+      background: var(--paper);
+      color: var(--ink);
+      transition: all 0.2s ease;
+      width: 100%;
+    }
+    .field input:focus,
+    .field select:focus,
+    .field textarea:focus {
+      outline: none;
+      border-color: var(--navy);
+      background: white;
+      box-shadow: 0 0 0 4px rgba(26, 43, 74, 0.08);
+    }
+    .field input:disabled {
+      background: var(--warm);
+      color: var(--ink-soft);
+      cursor: not-allowed;
+    }
+    .field textarea { resize: vertical; min-height: 80px; }
+
+    .field-hint {
+      font-size: 11.5px;
+      color: var(--ink-muted);
+      margin-top: 2px;
+    }
+    .field-error {
+      font-size: 12px;
+      color: var(--error);
+      margin-top: 2px;
+      display: none;
+      font-weight: 500;
+    }
+    .field.has-error input,
+    .field.has-error select,
+    .field.has-error textarea {
+      border-color: var(--error);
+      background: var(--error-bg);
+    }
+    .field.has-error .field-error { display: block; }
+
+    /* ── FILE UPLOAD ── */
+    .file-upload {
+      border: 2px dashed var(--line);
+      border-radius: 12px;
+      padding: 16px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      background: var(--paper);
+    }
+    .file-upload:hover {
+      border-color: var(--gold);
+      background: var(--warm);
+    }
+    .file-upload input[type="file"] { display: none; }
+    .file-upload-icon {
+      font-size: 32px;
+      margin-bottom: 6px;
+      display: block;
+    }
+    .file-upload-text {
+      font-size: 13px;
+      color: var(--ink-soft);
+      font-weight: 500;
+    }
+    .file-upload-text strong { color: var(--navy); }
+    .file-upload.has-file {
+      background: var(--success-bg);
+      border-color: var(--success);
+      border-style: solid;
+    }
+    .file-upload.has-file .file-upload-text strong {
+      color: var(--success);
+    }
+
+    /* ── DATE/AGE BANNER ── */
+    .date-banner {
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
+      color: white;
+      padding: 20px 24px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .date-banner .date-info {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .date-banner .icon {
+      font-size: 28px;
+    }
+    .date-banner .label {
+      font-size: 12px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 700;
+    }
+    .date-banner .value {
+      font-family: 'Fraunces', serif;
+      font-size: 20px;
+      font-weight: 700;
+    }
+
+    /* ── SUBMIT BUTTON ── */
+    .submit-section {
+      text-align: center;
+      margin-top: 32px;
+      padding: 28px;
+      background: white;
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--line);
+    }
+    .submit-section h3 {
+      font-family: 'Fraunces', serif;
+      font-size: 22px;
+      color: var(--navy);
+      margin-bottom: 8px;
+    }
+    .submit-section p {
+      color: var(--ink-muted);
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+    .btn-submit {
+      background: var(--navy);
+      color: white;
+      font-family: inherit;
+      font-size: 16px;
+      font-weight: 700;
+      padding: 16px 40px;
+      border: none;
+      border-radius: 100px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      letter-spacing: 0.5px;
+      box-shadow: 0 4px 12px rgba(26, 43, 74, 0.2);
+    }
+    .btn-submit:hover {
+      background: var(--navy-light);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(26, 43, 74, 0.3);
+    }
+    .btn-submit:active { transform: translateY(0); }
+
+    /* ── SUCCESS MODAL ── */
+    .success-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(26, 43, 74, 0.85);
+      z-index: 100;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      backdrop-filter: blur(8px);
+      animation: fadeIn 0.3s ease;
+    }
+    .success-modal.show { display: flex; }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @keyframes slideUp {
+      from { transform: translateY(40px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    .success-content {
+      background: white;
+      border-radius: 20px;
+      padding: 48px 32px;
+      max-width: 480px;
+      text-align: center;
+      animation: slideUp 0.4s ease;
+      box-shadow: var(--shadow-lg);
+      border-top: 6px solid var(--success);
+    }
+    .success-content .check-icon {
+      width: 80px;
+      height: 80px;
+      background: var(--success-bg);
+      color: var(--success);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 48px;
+      margin: 0 auto 20px;
+    }
+    .success-content h2 {
+      font-family: 'Fraunces', serif;
+      color: var(--navy);
+      margin-bottom: 12px;
+      font-size: 26px;
+    }
+    .success-content p {
+      color: var(--ink-soft);
+      margin-bottom: 8px;
+      line-height: 1.6;
+    }
+    .success-content .ref-number {
+      background: var(--warm);
+      padding: 12px 20px;
+      border-radius: 10px;
+      margin: 20px 0;
+      font-family: 'Fraunces', serif;
+      font-size: 20px;
+      color: var(--navy);
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+    .success-content .stats {
+      background: var(--success-bg);
+      padding: 16px;
+      border-radius: 10px;
+      color: var(--success);
+      font-size: 13px;
+      font-weight: 600;
+      margin: 16px 0 24px;
+    }
+    .btn-close-success {
+      background: var(--navy);
+      color: white;
+      font-family: inherit;
+      font-weight: 600;
+      padding: 12px 32px;
+      border: none;
+      border-radius: 100px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .btn-close-success:hover { background: var(--navy-light); }
+
+    /* ── INNOVATION BADGE ── */
+    .innovation-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--success-bg);
+      color: var(--success);
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 700;
+      margin-left: 8px;
+    }
+
+    /* ── FOOTER ── */
+    .footer {
+      text-align: center;
+      padding: 24px;
+      color: var(--ink-muted);
+      font-size: 12px;
+      border-top: 1px solid var(--line);
+      margin-top: 40px;
+      background: white;
+    }
+    .footer strong { color: var(--navy); }
+
+    /* ── MOBILE ── */
+    @media (max-width: 700px) {
+      .field-grid,
+      .field-grid.three-cols { grid-template-columns: 1fr; }
+      .form-container { padding: 16px 12px 60px; }
+      .section { padding: 20px; }
+      .institutional-header h1 { font-size: 18px; }
+      .form-title h2 { font-size: 26px; }
+      .section-header { gap: 12px; }
+      .section-number { width: 36px; height: 36px; font-size: 16px; }
+      .section-title h3 { font-size: 18px; }
+    }
+  </style>
+</head>
+<body>
+  <!-- ─── HEADER INSTITUCIONAL ─── -->
+  <header class="institutional-header">
+    <div class="ministry">Ministerio de Educación · Regional de San Miguelito</div>
+    <h1>Formulario de Inscripción de Matrícula 2026</h1>
+    <div class="school-name">Escuela Nueve de Enero</div>
+  </header>
+
+  <!-- ─── PROGRESS BAR ─── -->
+  <div class="progress-container">
+    <div class="progress-bar">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
+    <div class="progress-text">
+      <span>Progreso del formulario</span>
+      <span id="progressText">0% completado</span>
+    </div>
+  </div>
+
+  <main class="form-container">
+    <div class="form-title">
+      <span class="badge">Versión Digital · MGIMD</span>
+      <h2>Inscripción Escolar</h2>
+      <p>Complete los datos solicitados para procesar la matrícula del estudiante</p>
+    </div>
+
+    <form id="matriculaForm" novalidate>
+
+      <!-- ─── FECHA AUTOMÁTICA ─── -->
+      <div class="date-banner">
+        <div class="date-info">
+          <span class="icon">📅</span>
+          <div>
+            <div class="label">Fecha de Inscripción</div>
+            <div class="value" id="fechaActual">—</div>
+          </div>
+        </div>
+        <div style="font-size: 12px; color: var(--gold); font-weight: 600;">
+          ✓ Generada automáticamente
+        </div>
+      </div>
+
+      <!-- ─── SECCIÓN 1: DATOS DEL ESTUDIANTE ─── -->
+      <section class="section" style="margin-top: 24px;">
+        <div class="section-header">
+          <div class="section-number">1</div>
+          <div class="section-title">
+            <h3>Datos Generales del Estudiante</h3>
+            <div class="subtitle">Información personal del alumno a matricular</div>
+          </div>
+        </div>
+
+        <div class="field-grid">
+          <div class="field">
+            <label>Primer Nombre <span class="req">*</span></label>
+            <input type="text" name="primer_nombre" required />
+            <span class="field-error">Este campo es obligatorio</span>
+          </div>
+          <div class="field">
+            <label>Segundo Nombre <span class="opt">(opcional)</span></label>
+            <input type="text" name="segundo_nombre" />
+          </div>
+          <div class="field">
+            <label>Apellido Paterno <span class="req">*</span></label>
+            <input type="text" name="apellido_paterno" required />
+            <span class="field-error">Este campo es obligatorio</span>
+          </div>
+          <div class="field">
+            <label>Apellido Materno <span class="req">*</span></label>
+            <input type="text" name="apellido_materno" required />
+            <span class="field-error">Este campo es obligatorio</span>
+          </div>
+          <div class="field">
+            <label>N.° Cédula <span class="req">*</span></label>
+            <input type="text" name="cedula" placeholder="0-000-0000" pattern="[0-9\-PE]+" required />
+            <span class="field-hint">Ejemplo: 8-1234-5678</span>
+            <span class="field-error">Formato inválido</span>
+          </div>
+          <div class="field">
+            <label>Fecha de Nacimiento <span class="req">*</span></label>
+            <input type="date" name="fecha_nacimiento" id="fechaNacimiento" required />
+            <span class="field-error">Este campo es obligatorio</span>
+          </div>
+          <div class="field">
+            <label>Edad Actual al 2 de Marzo 2026</label>
+            <input type="text" id="edadCalculada" disabled placeholder="Se calcula automáticamente" />
+            <span class="field-hint">✓ Cálculo automático</span>
+          </div>
+          <div class="field">
+            <label>Sexo <span class="req">*</span></label>
+            <select name="sexo" required>
+              <option value="">— Seleccione —</option>
+              <option value="M">Masculino</option>
+              <option value="F">Femenino</option>
+            </select>
+            <span class="field-error">Este campo es obligatorio</span>
+          </div>
+          <div class="field">
+            <label>Nacionalidad <span class="req">*</span></label>
+            <select name="nacionalidad" required>
+              <option value="">— Seleccione —</option>
+              <option value="Panameña" selected>Panameña</option>
+              <option value="Colombiana">Colombiana</option>
+              <option value="Venezolana">Venezolana</option>
+              <option value="Costarricense">Costarricense</option>
+              <option value="Nicaragüense">Nicaragüense</option>
+              <option value="Otra">Otra</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Grado que Cursa <span class="req">*</span></label>
+            <select name="grado_actual" required>
+              <option value="">— Seleccione —</option>
+              <option>Preescolar</option>
+              <option>1° Grado</option>
+              <option>2° Grado</option>
+              <option>3° Grado</option>
+              <option>4° Grado</option>
+              <option>5° Grado</option>
+              <option>6° Grado</option>
+            </select>
+            <span class="field-error">Este campo es obligatorio</span>
+          </div>
+          <div class="field">
+            <label>Grado que Cursará <span class="req">*</span></label>
+            <select name="grado_proximo" required>
+              <option value="">— Seleccione —</option>
+              <option>Preescolar</option>
+              <option>1° Grado</option>
+              <option>2° Grado</option>
+              <option>3° Grado</option>
+              <option>4° Grado</option>
+              <option>5° Grado</option>
+              <option>6° Grado</option>
+            </select>
+            <span class="field-error">Este campo es obligatorio</span>
+          </div>
+        </div>
+
+        <div style="margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--warm);">
+          <h4 style="font-family: 'Fraunces', serif; color: var(--navy); margin-bottom: 16px; font-size: 17px;">📍 Dirección Residencial</h4>
+          <div class="field-grid">
+            <div class="field">
+              <label>Barriada <span class="req">*</span></label>
+              <input type="text" name="barriada" required />
+            </div>
+            <div class="field">
+              <label>Sector <span class="req">*</span></label>
+              <input type="text" name="sector" required />
+            </div>
+            <div class="field">
+              <label>Calle <span class="req">*</span></label>
+              <input type="text" name="calle" required />
+            </div>
+            <div class="field">
+              <label>Casa N.° <span class="req">*</span></label>
+              <input type="text" name="casa_numero" required />
+            </div>
+            <div class="field field-full">
+              <label>Punto de Referencia <span class="opt">(opcional)</span></label>
+              <textarea name="punto_referencia" placeholder="Ej: frente al parque, detrás de la iglesia..."></textarea>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ─── SECCIÓN 2: PRIMER ACUDIENTE ─── -->
+      <section class="section">
+        <div class="section-header">
+          <div class="section-number">2</div>
+          <div class="section-title">
+            <h3>Datos del Primer Acudiente</h3>
+            <div class="subtitle">Padre, madre o tutor legal principal</div>
+          </div>
+        </div>
+
+        <div class="field-grid">
+          <div class="field">
+            <label>Primer Nombre <span class="req">*</span></label>
+            <input type="text" name="ac1_primer_nombre" required />
+            <span class="field-error">Este campo es obligatorio</span>
+          </div>
+          <div class="field">
+            <label>Segundo Nombre <span class="opt">(opcional)</span></label>
+            <input type="text" name="ac1_segundo_nombre" />
+          </div>
+          <div class="field">
+            <label>Apellido Paterno <span class="req">*</span></label>
+            <input type="text" name="ac1_apellido_paterno" required />
+            <span class="field-error">Este campo es obligatorio</span>
+          </div>
+          <div class="field">
+            <label>Apellido Materno <span class="req">*</span></label>
+            <input type="text" name="ac1_apellido_materno" required />
+            <span class="field-error">Este campo es obligatorio</span>
+          </div>
+          <div class="field">
+            <label>N.° Cédula <span class="req">*</span></label>
+            <input type="text" name="ac1_cedula" placeholder="0-000-0000" required />
+            <span class="field-error">Este campo es obligatorio</span>
+          </div>
+          <div class="field">
+            <label>N.° Celular <span class="req">*</span></label>
+            <input type="tel" name="ac1_celular" placeholder="6000-0000" required />
+            <span class="field-hint">Recibirá notificaciones por WhatsApp</span>
+            <span class="field-error">Este campo es obligatorio</span>
+          </div>
+          <div class="field">
+            <label>Teléfono Residencial <span class="opt">(opcional)</span></label>
+            <input type="tel" name="ac1_telefono" placeholder="000-0000" />
+          </div>
+          <div class="field">
+            <label>Correo Electrónico <span class="innovation-badge">✨ Nuevo</span></label>
+            <input type="email" name="ac1_correo" placeholder="ejemplo@correo.com" />
+            <span class="field-hint">Para enviar la confirmación de matrícula</span>
+          </div>
+          <div class="field field-full">
+            <label>Dirección Residencial <span class="req">*</span></label>
+            <textarea name="ac1_direccion" required></textarea>
+            <span class="field-error">Este campo es obligatorio</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ─── SECCIÓN 3: SEGUNDO ACUDIENTE ─── -->
+      <section class="section">
+        <div class="section-header">
+          <div class="section-number">3</div>
+          <div class="section-title">
+            <h3>Datos del Segundo Acudiente <span class="optional-badge">OPCIONAL</span></h3>
+            <div class="subtitle">Si aplica, complete los datos del segundo acudiente</div>
+          </div>
+        </div>
+
+        <div class="field-grid">
+          <div class="field">
+            <label>Primer Nombre</label>
+            <input type="text" name="ac2_primer_nombre" />
+          </div>
+          <div class="field">
+            <label>Segundo Nombre</label>
+            <input type="text" name="ac2_segundo_nombre" />
+          </div>
+          <div class="field">
+            <label>Apellido Paterno</label>
+            <input type="text" name="ac2_apellido_paterno" />
+          </div>
+          <div class="field">
+            <label>Apellido Materno</label>
+            <input type="text" name="ac2_apellido_materno" />
+          </div>
+          <div class="field">
+            <label>N.° Cédula</label>
+            <input type="text" name="ac2_cedula" placeholder="0-000-0000" />
+          </div>
+          <div class="field">
+            <label>N.° Celular</label>
+            <input type="tel" name="ac2_celular" placeholder="6000-0000" />
+          </div>
+          <div class="field">
+            <label>Teléfono Residencial</label>
+            <input type="tel" name="ac2_telefono" placeholder="000-0000" />
+          </div>
+          <div class="field">
+            <label>Correo Electrónico</label>
+            <input type="email" name="ac2_correo" />
+          </div>
+          <div class="field field-full">
+            <label>Dirección Residencial</label>
+            <textarea name="ac2_direccion"></textarea>
+          </div>
+        </div>
+      </section>
+
+      <!-- ─── SECCIÓN 4: DOCUMENTOS (NUEVA - INNOVACIÓN MGIMD) ─── -->
+      <section class="section">
+        <div class="section-header">
+          <div class="section-number">4</div>
+          <div class="section-title">
+            <h3>Documentos Digitales <span class="innovation-badge">✨ Innovación MGIMD</span></h3>
+            <div class="subtitle">Suba fotos de los documentos requeridos desde su celular</div>
+          </div>
+        </div>
+
+        <div class="field-grid">
+          <div class="field field-full">
+            <label>📷 Foto del Estudiante</label>
+            <label class="file-upload" data-target="foto_estudiante">
+              <input type="file" accept="image/*" />
+              <span class="file-upload-icon">🖼️</span>
+              <span class="file-upload-text"><strong>Haga clic para subir</strong> · Formatos: JPG, PNG</span>
+            </label>
+          </div>
+          <div class="field field-full">
+            <label>🪪 Cédula del Acudiente Principal</label>
+            <label class="file-upload" data-target="cedula_acudiente">
+              <input type="file" accept="image/*,application/pdf" />
+              <span class="file-upload-icon">📄</span>
+              <span class="file-upload-text"><strong>Haga clic para subir</strong> · Formatos: JPG, PNG, PDF</span>
+            </label>
+          </div>
+          <div class="field field-full">
+            <label>📜 Certificado de Nacimiento</label>
+            <label class="file-upload" data-target="cert_nacimiento">
+              <input type="file" accept="image/*,application/pdf" />
+              <span class="file-upload-icon">📜</span>
+              <span class="file-upload-text"><strong>Haga clic para subir</strong> · Formatos: JPG, PNG, PDF</span>
+            </label>
+          </div>
+          <div class="field field-full">
+            <label>📚 Boletín del Grado Anterior</label>
+            <label class="file-upload" data-target="boletin">
+              <input type="file" accept="image/*,application/pdf" />
+              <span class="file-upload-icon">📚</span>
+              <span class="file-upload-text"><strong>Haga clic para subir</strong> · Formatos: JPG, PNG, PDF</span>
+            </label>
+          </div>
+        </div>
+      </section>
+
+      <!-- ─── SUBMIT ─── -->
+      <div class="submit-section">
+        <h3>¿Listo para enviar?</h3>
+        <p>Verifique que toda la información sea correcta antes de procesar la matrícula</p>
+        <button type="submit" class="btn-submit">📨 Enviar Inscripción</button>
+      </div>
+    </form>
+  </main>
+
+  <!-- ─── SUCCESS MODAL ─── -->
+  <div class="success-modal" id="successModal">
+    <div class="success-content">
+      <div class="check-icon">✓</div>
+      <h2>¡Inscripción Enviada!</h2>
+      <p>La solicitud de matrícula ha sido registrada exitosamente en el sistema MGIMD.</p>
+      <div class="ref-number" id="refNumber">REF: —</div>
+      <p style="font-size: 13px;">Recibirá la confirmación por WhatsApp y correo en pocos minutos.</p>
+      <div class="stats">
+        ⚡ Procesado en menos de 1 minuto · Sistema MGIMD
+      </div>
+      <button class="btn-close-success" onclick="closeSuccess()">Entendido</button>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <strong>MGIMD</strong> · Modelo de Gestión Integrada de la Matrícula Digital<br/>
+    Implementación: Edwin Velásquez & Raúl García · Asesora: Mgtr. Migdalis García Meneses
+  </footer>
+
+  <script>
+    // ── Auto-fill current date ──
+    function actualizarFecha() {
+      const meses = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio',
+                     'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
+      const hoy = new Date();
+      const dia = hoy.getDate();
+      const mes = meses[hoy.getMonth()];
+      const año = hoy.getFullYear();
+      document.getElementById('fechaActual').textContent = `${dia} de ${mes} de ${año}`;
+    }
+    actualizarFecha();
+
+    // ── Auto-calculate age based on March 2, 2026 ──
+    document.getElementById('fechaNacimiento').addEventListener('change', function() {
+      if (!this.value) {
+        document.getElementById('edadCalculada').value = '';
+        return;
+      }
+      const nacimiento = new Date(this.value);
+      const referencia = new Date('2026-03-02');
+      let años = referencia.getFullYear() - nacimiento.getFullYear();
+      let meses = referencia.getMonth() - nacimiento.getMonth();
+      if (meses < 0 || (meses === 0 && referencia.getDate() < nacimiento.getDate())) {
+        años--;
+        meses += 12;
+      }
+      if (referencia.getDate() < nacimiento.getDate()) meses--;
+      if (meses < 0) meses += 12;
+      document.getElementById('edadCalculada').value = `${años} años, ${meses} meses`;
+      updateProgress();
+    });
+
+    // ── File upload visual feedback ──
+    document.querySelectorAll('.file-upload').forEach(label => {
+      const input = label.querySelector('input[type="file"]');
+      const text = label.querySelector('.file-upload-text');
+      input.addEventListener('change', function() {
+        if (this.files.length > 0) {
+          label.classList.add('has-file');
+          text.innerHTML = `<strong>✓ ${this.files[0].name}</strong> · Archivo cargado`;
+          updateProgress();
+        }
+      });
+    });
+
+    // ── Progress bar ──
+    function updateProgress() {
+      const required = document.querySelectorAll('input[required], select[required], textarea[required]');
+      let filled = 0;
+      required.forEach(el => {
+        if (el.value && el.value.trim() !== '') filled++;
+      });
+      const percentage = Math.round((filled / required.length) * 100);
+      document.getElementById('progressFill').style.width = percentage + '%';
+      document.getElementById('progressText').textContent = percentage + '% completado';
+    }
+
+    // Listen to all required inputs
+    document.querySelectorAll('input[required], select[required], textarea[required]').forEach(el => {
+      el.addEventListener('input', updateProgress);
+      el.addEventListener('change', updateProgress);
+    });
+
+    // ── Form validation and submit ──
+    document.getElementById('matriculaForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      let valid = true;
+
+      document.querySelectorAll('.field').forEach(f => f.classList.remove('has-error'));
+
+      this.querySelectorAll('input[required], select[required], textarea[required]').forEach(el => {
+        if (!el.value || el.value.trim() === '') {
+          el.closest('.field').classList.add('has-error');
+          valid = false;
+        }
+      });
+
+      if (!valid) {
+        const firstError = document.querySelector('.has-error');
+        if (firstError) firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        return;
+      }
+
+      // Generate reference number
+      const ref = 'MGIMD-' + new Date().getFullYear() + '-' +
+                  Math.floor(Math.random() * 90000 + 10000);
+      document.getElementById('refNumber').textContent = 'REF: ' + ref;
+      document.getElementById('successModal').classList.add('show');
+    });
+
+    function closeSuccess() {
+      document.getElementById('successModal').classList.remove('show');
+      document.getElementById('matriculaForm').reset();
+      document.querySelectorAll('.file-upload').forEach(label => {
+        label.classList.remove('has-file');
+        const text = label.querySelector('.file-upload-text');
+        text.innerHTML = '<strong>Haga clic para subir</strong> · Formatos permitidos';
+      });
+      document.getElementById('edadCalculada').value = '';
+      updateProgress();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  </script>
+</body>
+</html>
